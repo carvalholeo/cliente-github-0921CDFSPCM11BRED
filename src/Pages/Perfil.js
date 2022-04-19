@@ -1,4 +1,21 @@
+import {useEffect, useState} from 'react';
+
+import apiGithub from '../services/apiGithub';
+
 function Perfil() {
+  const [perfil, setPerfil] = useState({});
+
+  useEffect(() => {
+    apiGithub.get('/user')
+      .then(resposta => {
+        setPerfil(resposta.data)
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log(perfil)
+  }, [perfil]);
+
   return (
     <main>
       {/* {showLoading &&
@@ -12,13 +29,13 @@ function Perfil() {
       } */}
           <>
             <h1>Meu perfil</h1>
-            <h2>Nome da pessoa</h2>
+            <h2>{perfil.name}</h2>
 
             <div className="card w-50 mx-auto align-items-center">
-              <img src={'perfil'} alt={`Foto de perfil de Pessoa`} className="card-img-top" style={{ maxWidth: "200px" }} />
+              <img src={perfil.avatar_url} alt={`Foto de perfil de ${perfil.name}`} className="card-img-top" style={{ maxWidth: "200px" }} />
               <div className="align-items-start">
                 <p><strong>Descrição</strong></p>
-                <small>Bio </small>
+                <small>{perfil.bio}</small>
                 <p>Usuário: <a href='caminho_github' target="_blank" rel="noreferrer noopener">login</a></p>
 
                 <p className="cart-text"><i className="me-2 bi bi-twitter"></i><a href={`https://twitter.com/twitter`} target="_blank" rel="noopener noreferrer">@twitter</a></p>

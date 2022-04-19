@@ -1,7 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-import NavBar from './components/NavBar'
+import NavBar from './components/NavBar';
+import Perfil from './Pages/Perfil';
 
 function App() {
   const caminhos = [
@@ -30,7 +31,7 @@ function App() {
   return (
     <div >
       <NavBar menu={caminhos}  />
-
+      <Perfil />
     </div>
   );
 }
